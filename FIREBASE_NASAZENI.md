@@ -2,7 +2,7 @@
 
 ## Stav k 23. listopadu 2026
 
-Připravená změna patří do repozitáře `anetava/karierovy-poradce-29`. Veřejné karty mají zůstat na [původní adrese](https://anetava.github.io/karierovy-poradce-29/). Při kontrole veřejný audit stále ukládal odpovědi místně. GitHub vrátil při vytváření pracovní větve HTTP 403. V seznamu tří repozitářů povolených pro instalaci GitHub App v době ověření tento repozitář chyběl. Změny jsou připravené pro předání a kontrolu před sloučením do publikační větve.
+Celá integrace je v [návrhu změn č. 1](https://github.com/anetava/karierovy-poradce-29/pull/1). Majitelka 23. listopadu opravila přístup k repozitáři a zápis na GitHub byl ověřen. Pro živé ověření vyučující byly v [samostatném vydání č. 2](https://github.com/anetava/karierovy-poradce-29/pull/2) přidány výhradně soubory vstupu pro ověření dvou modelových prací. Původních 20 karet a původní lokální studentský audit při tomto dílčím vydání zůstávají na své adrese. Návrh č. 1 po dokončení kontrol nahradí dvouzáznamový režim úplným přehledem a připojí studentskou část.
 
 | Co bylo ověřeno | Výsledek |
 | --- | --- |
@@ -37,7 +37,9 @@ Pokud kontrola našla přesně předchozí známá pravidla, správce může v p
 
 ### Neveřejná zkouška učitelského přístupu
 
-Na počítači vyučující lze v kořeni kandidátní verze spustit soukromý náhled přes Python 3. Server naslouchá pouze na tomto počítači.
+Pro živý test otevře vyučující [přehled modelových prací](https://anetava.github.io/karierovy-poradce-29/pravni-audit-ai/ucitel/) v běžném prohlížeči a přihlásí se vlastním povoleným účtem Google. Při tomto dílčím vydání databázový dotaz vybere pouze profily Alfa a Beta uvedené níže. Ověření na této adrese doloží průchod přihlášením na původní doméně. Ostatní profily zpřístupní oprávněné vyučující až úplné vydání.
+
+Alternativně lze na počítači vyučující v kořeni kandidátní verze spustit soukromý náhled přes Python 3. Server naslouchá pouze na tomto počítači.
 
 ```sh
 python -m http.server 8765 --bind 127.0.0.1
