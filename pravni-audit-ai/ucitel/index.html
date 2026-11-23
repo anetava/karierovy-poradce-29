@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Ověření dvou modelových zápisů v Právním auditu AI.">
+  <title>Ověření dvou modelových zápisů · Právní audit AI</title>
+  <link rel="stylesheet" href="teacher.css">
+  <script defer src="../firebase-config.js"></script>
+  <script defer src="firebase-models.js"></script>
+  <script defer src="teacher.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Přejít na obsah</a>
+<header class="site-header">
+  <a class="brand" href="../" aria-label="Právní audit AI, studentský vstup">
+    <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 6v15M12 6C8 3 5 3 2 4v16c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-6-1-10 2Z"/></svg></span>
+    <span><strong>Právní audit AI</strong><small>Přehled vyučující</small></span>
+  </a>
+  <div class="header-actions"><span id="teacherIdentity" class="teacher-identity" hidden></span><a class="quiet-link" href="../">Studentský vstup</a><button id="signOutButton" class="button quiet small" type="button" hidden>Odhlásit</button></div>
+</header>
+<main id="main" class="page">
+  <section id="entry" class="entry" aria-labelledby="entryTitle">
+    <div class="eyebrow">PRO VYUČUJÍCÍ</div><h1 id="entryTitle">Ověření dvou modelových zápisů</h1>
+    <p class="lead">Přihlaste se určeným účtem Google. Otevřete modelový zápis Alfa v případu DPP a zápis Beta v případu DPČ.</p>
+    <div id="loadingState" class="entry-status" role="status">Připravuji bezpečné přihlášení…</div>
+    <div id="setupState" class="setup-state" hidden><h2>Přehled ještě není připojený</h2><p>Nastavení ukládání a přístupu vyučující zatím není dokončené. Jakmile bude připravené, na této stránce se objeví přihlášení a práce studentů.</p><a href="../" class="button secondary">Otevřít studentský vstup</a></div>
+    <div id="authState" hidden><button id="signInButton" class="button primary" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span id="signInLabel">Přihlásit se účtem Google</span></button><p class="entry-note">Přístup má pouze určená vyučující. Studenti přihlašování Google nepotřebují; do auditu vstupují svým jménem.</p></div>
+    <div id="authMessage" class="notice error" role="alert" hidden></div>
+    <noscript><p class="notice error">Pro přihlášení a zobrazení zápisů zapněte JavaScript.</p></noscript>
+  </section>
+
+  <section id="dashboard" class="dashboard" aria-labelledby="dashboardTitle" hidden>
+    <div class="page-heading"><div><span class="eyebrow">SOUKROMÝ PŘEHLED VÝUKY</span><h1 id="dashboardTitle">Ověření dvou modelových zápisů</h1><p>Otevřete Alfu u případu DPP a Betu u případu DPČ. Ověřte text odpovědi a čas uložení v každém zápisu.</p></div><div class="live-state"><span class="live-dot" aria-hidden="true"></span><span id="liveStatus" role="status">Načítám přehled…</span><small>Změny se zobrazují průběžně.</small></div></div>
+    <div id="rosterError" class="notice error" role="alert" hidden></div>
+    <div class="roster-heading"><h2>Modelové profily <span id="studentCount" class="count">0</span></h2><p id="completionSummary"></p></div>
+    <div class="filters" aria-label="Filtry přehledu">
+      <label><span>Název modelového profilu</span><input id="nameFilter" type="search" autocomplete="off" placeholder="Najít studenta…"></label>
+      <label><span>Případ</span><select id="caseFilter"><option value="all">Všechny případy</option></select></label>
+      <label><span>Datum posledního uložení</span><input id="dateFilter" type="date"></label>
+      <button id="resetFilters" class="text-button" type="button" hidden>Zrušit filtry</button>
+    </div>
+    <p class="filter-note">Datum se řídí posledním uložením případu v čase Prahy. Prázdné datum neomezuje období; starší verze najdete v detailu.</p>
+    <p id="filterResult" class="sr-only" role="status"></p>
+    <div id="rosterEmpty" class="empty-state" role="status"><h3>Načítám uloženou práci…</h3></div>
+    <div id="rosterTableWrap" class="table-wrap" hidden><table class="student-table"><caption class="sr-only">Uložené zápisy studentů. Jména zadávají studenti sami.</caption><thead><tr><th scope="col">Student</th><th scope="col" id="caseColumn">Poslední uložený případ</th><th scope="col">Uložené části</th><th scope="col">Potvrzené uložení</th><th scope="col"><span class="sr-only">Otevřít práci</span></th></tr></thead><tbody id="rosterBody"></tbody></table></div>
+    <p class="table-note">Poslední volba u jména ukazuje, který případ student naposledy vybral. Zelená značka znamená vyplněný zápis. Správnost právního závěru posuzuje vyučující. Jméno zadané studentem není ověřením jeho totožnosti.</p>
+    <div class="roster-tools"><button id="refreshButton" class="text-button" type="button">Obnovit přehled</button></div>
+
+    <section id="studentDetail" class="student-detail" aria-labelledby="detailTitle" hidden>
+      <div class="detail-heading"><div><span class="eyebrow">ZÁPISY STUDENTA</span><h2 id="detailTitle" tabindex="-1"></h2><p id="detailJoined" class="muted"></p></div><button id="closeDetail" class="button quiet small" type="button">Zavřít detail</button></div>
+      <div id="detailError" class="notice error" role="alert" hidden></div>
+      <p id="detailLoading" class="detail-loading" role="status">Načítám zápisy studenta…</p>
+      <div id="detailBody" hidden>
+        <div class="detail-controls"><label><span>Vyberte případ</span><select id="detailCase"></select></label><div class="detail-downloads"><button id="downloadStudent" class="button secondary small" type="button">Stáhnout zápisy JSON</button><button id="printStudent" class="button quiet small" type="button">Vytisknout zápisy</button></div></div>
+        <p class="export-note">Stažení a tisk obsahují aktuální zápisy tohoto studenta ze všech případů.</p>
+        <details class="case-assignment"><summary>Zadání případu</summary><p id="caseSituation"></p><p><strong>Úkol: </strong><span id="caseTask"></span></p></details>
+        <details id="historyPanel" class="history-panel"><summary>Uložené verze tohoto případu</summary><p>Zde najdete nejvýše 40 posledních uložených verzí. Nejde o záznam každého stisku klávesy.</p><p id="historyLoading" role="status" hidden>Načítám verze…</p><p id="historyError" class="inline-error" role="alert" hidden></p><label id="historySelectWrap"><span>Zobrazená verze</span><select id="historySelect"><option value="">Aktuální zápis</option></select></label></details>
+        <div id="historicalNotice" class="notice historical" hidden><p id="historicalText"></p><button id="backToCurrent" class="text-button" type="button">Zpět na aktuální zápis</button></div>
+        <div id="recordMeta" class="record-meta"></div>
+        <div id="recordEmpty" class="empty-state" hidden></div>
+        <div id="recordFields"></div>
+        <p class="reading-note" id="readingConfirmation"></p>
+        <div class="teaching-note"><strong>Otázka pro ověření porozumění</strong><p>„Která konkrétní část ustanovení rozhoduje o tomto případu a proč?“</p></div>
+      </div>
+    </section>
+  </section>
+  <footer class="site-footer">Právní audit AI · Přehled ukazuje zápisy uložené v auditu. Nesleduje obrazovku studenta, jeho otevřené stránky ani samostatný chat s AI.</footer>
+</main>
+<article id="teacherPrint" class="print-report" aria-label="Tisk zápisů studenta"></article>
+</body>
+</html>
