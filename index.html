@@ -15,7 +15,7 @@ main{max-width:1240px;margin:auto;padding:28px 20px 70px}
 .cover{height:185px;position:relative;background:#ddd;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover;display:block}.num{position:absolute;left:16px;top:16px;width:52px;height:52px;border-radius:16px;background:#fff;display:grid;place-items:center;color:var(--vio);font-weight:950;font-size:19px;box-shadow:0 8px 18px rgba(30,20,45,.13)}
 .cb{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}.tag{font-size:10px;letter-spacing:.11em;font-weight:900;color:var(--vio)}.case h2{font:700 22px/1.12 Georgia,serif;margin:8px 0 9px}.case p{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 16px}.open{margin-top:auto;color:var(--vio);font-weight:900;font-size:13px}
 .workspace{display:none}.workspace.active{display:block}.home.hidden{display:none}.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:18px}.head h1{font:700 42px/1.03 Georgia,serif;margin:6px 0 0;max-width:900px}.head small{font-size:11px;color:var(--vio);font-weight:900;letter-spacing:.11em}
-.layout{display:grid;grid-template-columns:285px 1fr;gap:20px}.side{position:sticky;top:82px;background:#fffaf4;border:1px solid var(--line);border-radius:21px;padding:12px}.step{display:flex;gap:10px;padding:10px 8px;border-radius:13px;color:var(--muted);font-size:12px;cursor:pointer}.step .n{width:28px;height:28px;flex:0 0 auto;border-radius:9px;background:#eee5da;display:grid;place-items:center;font-weight:900}.step.active{background:#eee6fa;color:var(--vio);font-weight:850}.step.active .n{background:var(--vio);color:#fff}.step.done .n{background:#e2f0ea;color:var(--green)}
+.layout{display:grid;grid-template-columns:285px minmax(0,1fr);gap:20px}.side{position:static;align-self:start;background:#fffaf4;border:1px solid var(--line);border-radius:21px;padding:12px}.step{display:flex;gap:10px;padding:10px 8px;border-radius:13px;color:var(--muted);font-size:12px;cursor:pointer}.step .n{width:28px;height:28px;flex:0 0 auto;border-radius:9px;background:#eee5da;display:grid;place-items:center;font-weight:900}.step.active{background:#eee6fa;color:var(--vio);font-weight:850}.step.active .n{background:var(--vio);color:#fff}.step.done .n{background:#e2f0ea;color:var(--green)}
 .sheet{background:var(--paper);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(37,24,58,.08)}.heroimg{width:100%;height:320px;object-fit:cover;display:block}.shead{padding:25px 30px 17px;background:linear-gradient(135deg,#fffdf9,#f2ebf9);border-bottom:1px solid var(--line)}.shead h2{font:700 34px/1.05 Georgia,serif;margin:6px 0}.shead p{margin:0;color:var(--muted)}.content{padding:26px 30px}
 .do{background:linear-gradient(135deg,var(--vio),var(--vio2));color:white;border-radius:19px;padding:18px 20px;margin-bottom:18px}.do small{font-weight:900;letter-spacing:.12em}.do h3{margin:6px 0 6px;font-size:20px}.do p{margin:0;line-height:1.55;color:#f1eafa}
 .scope,.task,.legal,.model,.gdpr,.mentor,.finalbox{border-radius:17px;padding:16px;margin:13px 0;line-height:1.55}.scope{background:#edf6f2;border:1px solid #cfe5dc}.task{background:#f0e9f9;border:1px solid #dfd0f0}.legal{background:#eef6f9;border:1px solid #d0e3ec}.model{background:#fff5df;border:1px solid #e9d39f}.gdpr{background:#edf5fa;border:1px solid #d1e3ee;font-size:13px}.mentor{display:none;background:#fff;border:1px solid #ddcfed}.mentor.show{display:block}.finalbox{background:#f7f2fb;border:1px solid #ddcfed}
@@ -128,9 +128,7 @@ body{
 .mentor.show{display:block}.mentor b{color:var(--vio)}
 .nav{
   padding:18px 30px;
-  position:sticky;
-  bottom:0;
-  z-index:8;
+  position:static;
   box-shadow:0 -8px 24px rgba(36,26,50,.05);
 }
 .btn{border-radius:14px;padding:12px 18px}
@@ -208,23 +206,6 @@ textarea{
   font-size:11px;color:var(--muted);margin-top:8px;
 }
 .case-status b{color:var(--green)}
-.side-ad{
-  position:fixed;top:150px;width:110px;z-index:25;
-  background:linear-gradient(180deg,#4b267f,#6d48b2);
-  color:#fff;border-radius:22px;padding:18px 12px;
-  box-shadow:0 18px 40px rgba(75,38,127,.20);
-  text-align:center;
-}
-.side-ad.left{left:14px}
-.side-ad.right{right:14px}
-.side-ad .ad-small{font-size:9px;letter-spacing:.13em;text-transform:uppercase;opacity:.72}
-.side-ad .ad-title{font:700 18px/1.05 Georgia,serif;margin:8px 0 3px}
-.side-ad .ad-29{font-size:36px;font-weight:950;line-height:1;margin:6px 0}
-.side-ad .ad-copy{font-size:10px;line-height:1.35;opacity:.9}
-.side-ad .ad-mark{
-  width:34px;height:34px;border-radius:11px;margin:0 auto 9px;
-  background:#fff;color:#4b267f;display:grid;place-items:center;font-weight:950
-}
 .final-progress{
   display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;
 }
@@ -237,17 +218,12 @@ textarea{
   margin-top:12px;border:0;background:transparent;color:#8b6c9f;
   font-size:11px;text-decoration:underline;cursor:pointer
 }
-@media(max-width:1450px){.side-ad{display:none}}
 
 
 /* ===== SAFE WAU 2029 ===== */
-.side-ad{top:92px;bottom:18px;width:150px;padding:20px 14px;display:flex;flex-direction:column;justify-content:space-between;border-radius:28px;background:linear-gradient(180deg,#4b267f 0%,#5f39a2 52%,#734db7 100%);box-shadow:0 26px 55px rgba(61,36,105,.28);overflow:hidden}
-.side-ad:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 14px,transparent 14px 28px);pointer-events:none}
-.side-ad .ad-top,.side-ad .ad-bottom{position:relative;z-index:1}.side-ad .ad-mark{width:44px;height:44px;border-radius:14px;background:#fff;color:#4b267f;display:grid;place-items:center;font-weight:950;font-size:18px;box-shadow:0 10px 22px rgba(0,0,0,.12)}
-.side-ad .ad-title{font:700 20px/1.02 Georgia,serif;margin:10px 0 4px}.side-ad .ad-29{font-size:40px;font-weight:950;line-height:.95;margin:8px 0 10px}.side-ad .ad-list{display:grid;gap:8px;margin-top:12px}.side-ad .ad-pill{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);padding:8px 10px;border-radius:14px;font-size:10px;line-height:1.35}.side-ad .ad-bottom{font-size:10px;line-height:1.45;opacity:.92}
 .final-editor-wrap{margin-top:16px;border:1px solid #dfd1ee;border-radius:20px;background:#fff;overflow:hidden}.final-editor-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:#f4eefb;border-bottom:1px solid #e6daf2}.final-editor{min-height:360px;border:0;border-radius:0;padding:20px;line-height:1.65}
 .preview-card{margin-top:18px;border-radius:22px;overflow:hidden;border:1px solid #dfd4eb;background:#fff;box-shadow:0 12px 28px rgba(54,35,83,.08)}.print-sheet{position:relative;padding:28px;background:#fff}.print-brand{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding-bottom:18px;margin-bottom:18px;border-bottom:2px solid #eee4d6}.logo2029{display:flex;gap:14px;align-items:center}.logoBox2029{width:66px;height:66px;border-radius:20px;background:linear-gradient(135deg,#4b267f,#6d48b2);color:#fff;display:grid;place-items:center;font:700 26px/1 Georgia,serif}.logoText2029 h3{margin:0;font:700 24px/1.02 Georgia,serif}.logoText2029 p{margin:6px 0 0;font-size:12px;color:#6f687b}.meta2029{text-align:right;font-size:12px;color:#6e6878;line-height:1.55}.preview-title{font:700 27px/1.05 Georgia,serif;margin:2px 0 14px}.section2029{margin-top:16px;padding-top:14px;border-top:1px dashed #e5dccc}.section2029 h4{margin:0 0 7px;color:#4b267f;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.section2029 p{margin:0;white-space:pre-wrap;line-height:1.65}.idea-box{margin-top:14px;padding:13px 15px;border-radius:16px;background:#fffaf0;border:1px solid #ead8b0;font-size:12px;line-height:1.55;color:#5b4b2a}
-@media print{.side-ad,.top,.side,.nav,.help,.gdpr,.case-status,.step-hint,.save-line,.actions,.reset-link{display:none!important}.layout{display:block}.sheet{border:0;box-shadow:none}.content{padding:0}.shead{padding:0 0 12px;background:#fff;border:0}.final-editor-wrap{display:none!important}.preview-card{border:0;box-shadow:none}.print-sheet{padding:0}}
+@media print{.top,.side,.nav,.help,.gdpr,.case-status,.step-hint,.save-line,.actions,.reset-link{display:none!important}.layout{display:block}.sheet{border:0;box-shadow:none}.content{padding:0}.shead{padding:0 0 12px;background:#fff;border:0}.final-editor-wrap{display:none!important}.preview-card{border:0;box-shadow:none}.print-sheet{padding:0}}
 
 
 /* ===== ONE-PAGE OUTPUT + MOBILE REFINEMENT ===== */
@@ -266,7 +242,7 @@ textarea{
   .head h1{font-size:30px}
   .layout{grid-template-columns:1fr;gap:12px}
   .side{
-    position:sticky;top:68px;z-index:30;
+    position:static;
     display:flex;overflow-x:auto;gap:6px;
     padding:8px;background:rgba(255,253,249,.96);
     border-radius:16px;
@@ -286,7 +262,7 @@ textarea{
   .help{flex-direction:column;align-items:stretch}
   .help .btn{width:100%}
   .nav{
-    position:sticky;bottom:0;
+    position:static;
     padding:12px 14px;
     gap:8px;
   }
@@ -296,7 +272,6 @@ textarea{
   .final-editor{min-height:320px;font-size:16px}
   .print-brand{flex-direction:column}
   .meta2029{text-align:left}
-  .side-ad{display:none!important}
 }
 @media(max-width:560px){
   .grid{grid-template-columns:1fr}
@@ -484,25 +459,51 @@ textarea{
   .reference-client-output .rco-head{flex-direction:column}
 }
 
+
+/* Responsive navigation and the independent AI audit section. */
+.topin{flex-wrap:wrap}
+.logo{flex:0 0 auto}
+.brand{min-width:0}
+.progwrap{min-width:180px}
+.audit-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:0 0 auto;padding:10px 13px;border:1px solid var(--vio-border);border-radius:12px;background:#f7f2fb;color:var(--vio);font-size:12px;font-weight:850;text-decoration:none}
+.audit-link:hover{background:#eee6f8}
+.audit-link:focus-visible,.audit-entry a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.audit-entry{display:flex;justify-content:space-between;align-items:center;gap:24px;margin:0 0 28px;padding:22px 24px;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:20px;background:var(--paper)}
+.audit-entry h2{font:700 28px/1.15 Georgia,serif;margin:5px 0 8px}
+.audit-entry p{max-width:740px;margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.audit-entry .btn{display:inline-flex;justify-content:center;flex:0 0 auto;text-decoration:none;text-align:center}
+.grid>* ,.layout>* ,.grid2>* ,.head>* ,.help>* ,.reference-head>*{min-width:0}
+.content,.shead,.head,.cb,.audit-entry{overflow-wrap:anywhere}
+.head .btn{flex-shrink:0}
+.nav{gap:10px;flex-wrap:wrap}
+.nav .btn{min-width:0;white-space:normal}
+.save-line{flex-wrap:wrap}
+.checks input,.compare-list input{flex:0 0 auto}
+@media(max-width:1100px){
+  .reference-head{flex-wrap:wrap;align-items:flex-start}
+  .reference-head .btn{max-width:100%;white-space:normal}
+}
+@media(max-width:900px){
+  .top{position:static}
+  .progwrap{order:3;flex-basis:100%;min-width:0}
+  .side{width:100%;max-width:100%;min-width:0}
+  .audit-entry{align-items:flex-start;flex-direction:column;gap:16px;padding:20px}
+  .audit-entry .btn{max-width:100%;white-space:normal}
+}
+@media(max-width:560px){
+  .audit-link{order:2;width:100%}
+  .progwrap{order:3}
+  .audit-entry h2{font-size:26px}
+  .audit-entry .btn{width:100%}
+  .nav{padding:12px}
+}
+@media print{.audit-entry,.audit-link{display:none!important}}
+
 </style></head>
 <body>
-<div class="side-ad left">
-  <div class="ad-mark">K+</div>
-  <div class="ad-small">MOTIVACE</div>
-  <div class="ad-title">KARIÉROVÝ<br>PORADCE</div>
-  <div class="ad-29">29</div>
-  <div class="ad-copy">Právo • praxe • jistota v rozhodování</div><div class="ad-list"><div class="ad-pill">20 situací z praxe</div><div class="ad-pill">Konkrétní paragrafy a postupy</div><div class="ad-pill">Výstup pro klienta</div></div>
-</div>
-<div class="side-ad right">
-  <div class="ad-mark">K+</div>
-  <div class="ad-small">MOTIVACE</div>
-  <div class="ad-title">KARIÉROVÝ<br>PORADCE</div>
-  <div class="ad-29">29</div>
-  <div class="ad-copy">Právo • praxe • jistota v rozhodování</div><div class="ad-list"><div class="ad-pill">20 situací z praxe</div><div class="ad-pill">Konkrétní paragrafy a postupy</div><div class="ad-pill">Výstup pro klienta</div></div>
-</div>
-<header class="top"><div class="topin"><div class="logo">§</div><div class="brand"><b>LEGISLATIVA KARIÉROVÉHO PORADCE</b><span>20 interaktivních kazuistik</span></div><div class="progwrap"><div class="pmeta"><span id="pt">Vyberte případ</span><span id="pc">0 %</span></div><div class="prog"><div id="pb"></div></div></div></div></header>
+<header class="top"><div class="topin"><div class="logo">§</div><div class="brand"><b>LEGISLATIVA KARIÉROVÉHO PORADCE</b><span>20 interaktivních kazuistik</span></div><div class="progwrap"><div class="pmeta"><span id="pt">Vyberte případ</span><span id="pc">0 %</span></div><div class="prog"><div id="pb"></div></div></div><a class="audit-link" href="./pravni-audit-ai/index.html" onclick="save()">Právní audit AI →</a></div></header>
 <main>
-<section class="home" id="home"><div class="hero"><div class="kicker">Kariérové poradenství v konkrétních situacích</div><h1>20 klientů.<br>20 skutečných rozhodnutí.</h1><p>Každým případem projdete od zjištění situace přes právní oporu až k vlastnímu poradenskému doporučení. To, co během případu napíšete, se na konci spojí do jednoho pracovního výstupu.</p></div><div class="grid" id="grid"></div></section>
+<section class="home" id="home"><div class="hero"><div class="kicker">Kariérové poradenství v konkrétních situacích</div><h1>20 klientů.<br>20 skutečných rozhodnutí.</h1><p>Každým případem projdete od zjištění situace přes právní oporu až k vlastnímu poradenskému doporučení. To, co během případu napíšete, se na konci spojí do jednoho pracovního výstupu.</p></div><section class="audit-entry" aria-labelledby="auditTitle"><div><div class="kicker">Navazující procvičování · 10 úloh</div><h2 id="auditTitle">Právní audit AI</h2><p>Nechte AI posoudit situaci klienta. Potom otevřete účinné znění zákona, přečtěte konkrétní ustanovení a její odpověď potvrďte nebo opravte. Výsledky si ponecháte u sebe.</p></div><a class="btn" href="./pravni-audit-ai/index.html">Otevřít Právní audit AI →</a></section><div class="grid" id="grid"></div></section>
 <section class="workspace" id="workspace"><div class="head"><div><small id="cat"></small><h1 id="title"></h1></div><button class="btn ghost" onclick="goHome()">← Všechny případy</button></div><div class="layout"><aside class="side" id="side"></aside><article class="sheet"><div id="pane"></div><div class="nav"><button class="btn ghost" onclick="prev()">← Zpět</button><button class="btn" id="next" onclick="next()">Pokračovat →</button></div></article></div></section>
 </main>
 <script>
