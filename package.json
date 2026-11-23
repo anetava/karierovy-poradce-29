@@ -1,0 +1,21 @@
+{
+  "name": "pravni-audit-ai",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-firebase.mjs",
+    "test:student": "node --test tests/student-sync.test.mjs",
+    "test:teacher": "node --test tests/teacher-ui.test.mjs",
+    "test:rules": "firebase emulators:exec --only firestore,auth --project demo-pravni-audit \"node --test tests/firebase-rules.test.mjs && node --test tests/teacher-store.test.mjs\"",
+    "check:release": "node scripts/check-release.mjs"
+  },
+  "dependencies": {
+    "firebase": "13.4.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "6.0.0",
+    "esbuild": "0.28.2",
+    "firebase-tools": "15.37.0"
+  }
+}
