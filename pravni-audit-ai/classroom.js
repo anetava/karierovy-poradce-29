@@ -66,7 +66,7 @@
     $('classJoinButton').disabled=starting||restoring||initializing||!authReady||!remote?.configured;
     $('className').disabled=starting||restoring||initializing||!authReady||!remote?.configured;
     $('classModeText').textContent=session?'Váš pracovní list':restoring||initializing?'Otevírám Váš pracovní list…':!remote?.configured?'Pracovní list čeká na připojení':'Začněte svým jménem';
-    $('classJoinLead').textContent=remote?.configured?'Vaše zápisy se průběžně ukládají a vidí je vyučující.':'Výklad a vzor jsou dostupné. Sdílenou práci bude možné otevřít po dokončení připojení ukládání.';
+    $('classJoinLead').textContent=remote?.configured?(session?'Před odchodem zkontrolujte, že vidíte zprávu „Uloženo pro vyučující“.':'Zadejte jméno a příjmení a zvolte „Začít pracovat“.'):'Výklad a vzor jsou dostupné. Sdílenou práci bude možné otevřít po dokončení připojení ukládání.';
     $('introMode').textContent=session?'Vyberte případ a pracujte. Rozpracované odpovědi se ukládají automaticky.':'Napište nahoře jméno a otevřete vlastní pracovní list. Výklad a vzor si můžete prohlédnout kdykoliv.';
     $('classLocalBackup').disabled=!session||closing;
     if(savedSession){$('classResumeText').textContent=restoring?'Ověřuji přístup k pracovnímu listu…':'Na tomto zařízení zůstal dřívější vstup.';$('classResumeButton').disabled=restoring;}
@@ -356,7 +356,6 @@
     });
   }
   async function init(){
-    $('classTeacher').href='./ucitel/';
     render();
     if(!bridge||!remote?.configured){initializing=false;render();showError('Automatické ukládání ještě není připojené. Výklad a vzor můžete používat. Vaše nové odpovědi by se zatím vyučující neukládaly.');return;}
     if(!await claimEditor()){initializing=false;render();return;}

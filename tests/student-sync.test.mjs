@@ -41,7 +41,7 @@ test('no REST API, server host, credential bearer or interval polling remains in
  assert.doesNotMatch(raw,/fetch\s*\(|\/api\/|https?:\/\/|Authorization|Bearer|setInterval\s*\(/);
 });
 test('null Firebase configuration blocks name entry and makes no adapter requests',async()=>{
- const h=harness({configured:false});await h.ready();assert.equal(h.calls.length,0);assert.equal(h.node('classJoinButton').disabled,true);assert.equal(h.node('auditFields').disabled,true);assert.match(h.node('classError').textContent,/ještě není připojené/);assert.equal(h.node('classTeacher').href,'./ucitel/');h.node('className').value='Jana Nováková';await h.ctx.__auditTest.join({preventDefault(){}});assert.equal(h.calls.length,0);
+ const h=harness({configured:false});await h.ready();assert.equal(h.calls.length,0);assert.equal(h.node('classJoinButton').disabled,true);assert.equal(h.node('auditFields').disabled,true);assert.match(h.node('classError').textContent,/ještě není připojené/);h.node('className').value='Jana Nováková';await h.ctx.__auditTest.join({preventDefault(){}});assert.equal(h.calls.length,0);
 });
 test('name entry calls only student start with name and opens the named workspace',async()=>{
  const h=harness({initialUid:null});await h.ready();h.node('className').value='Jana Nováková';await h.ctx.__auditTest.join({preventDefault(){}});const start=h.calls.find(c=>c.method==='start');assert.deepEqual(start.args,['Jana Nováková']);assert.equal(h.node('auditFields').disabled,false);assert.equal(h.node('classIdentity').textContent,'Jana Nováková');assert.equal(JSON.parse(h.storage.get(savedKey)).token,uid);

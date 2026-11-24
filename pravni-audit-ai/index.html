@@ -41,7 +41,7 @@
     @media(max-width:680px){.student-guide>summary{padding:15px}.guide-content{padding:18px 15px}.guide-checks{grid-template-columns:1fr;gap:9px}.guide-reference>div{grid-template-columns:1fr;gap:4px}.guide-step h3{font-size:23px;gap:9px}.guide-extra{padding:14px}.guide-number{width:29px;height:29px}.guide-summary-copy strong{font-size:18px}}
   </style>
   <link rel="stylesheet" href="classroom.css">
-  <link rel="stylesheet" href="learning.css">
+  <link rel="stylesheet" href="learning.css?v=uvod-20261124">
 </head>
 <body>
 <a class="skip" href="#learning-tabs">Přejít na obsah auditu</a>
@@ -50,8 +50,8 @@
 <main class="wrap">
   <section id="learning-work" data-learning-panel="work" aria-label="Moje práce">
   <section class="classroom" aria-labelledby="classModeText">
-    <div class="classroom-top"><div><h2 id="classModeText">Začněte svým jménem</h2><p id="classJoinLead">Vaše zápisy se průběžně ukládají a vidí je vyučující.</p></div><a id="classTeacher" href="ucitel/" target="_blank" rel="noopener">Přehled vyučující</a></div>
-    <p id="auditPrivacyBrief">Zadejte jméno a příjmení pro označení své práce. Vyučující uvidí průběžně uložené odpovědi a jejich předchozí verze a může Vám poskytnout zpětnou vazbu. Podrobnosti o zpracování údajů najdete níže.</p>
+    <div class="classroom-top"><div><h2 id="classModeText">Začněte svým jménem</h2><p id="classJoinLead">Zadejte jméno a příjmení a zvolte „Začít pracovat“.</p></div></div>
+    <p id="auditPrivacyBrief">Vyučující vidí Vaše jméno, rozpracované odpovědi i jejich uložené verze.</p>
     <details id="auditPrivacy" class="classroom-options">
       <summary>Jak se nakládá s Vaší prací a osobními údaji</summary>
       <p><strong>Účel a rozsah.</strong> Údaje slouží k vedení pracovního listu a ke zpětné vazbě v předmětu Legislativa kariérového poradce na IVP ČZU. Ukládá se jméno a příjmení, obsah listu včetně předchozích verzí, čas zahájení a čas uložení, číslo Vámi vybraného případu, číslo naposledy uloženého případu a stav vyplnění. Součástí záznamu je technický identifikátor účtu (UID), který odlišuje i dvě osoby stejného jména. Zelená značka vyjadřuje vyplnění polí. Právní úsudek posuzuje vyučující.</p>
@@ -107,7 +107,7 @@
           <h3><span class="guide-number" aria-hidden="true">📅</span>Ověřte datum a použité znění zákona</h3>
           <div class="guide-do"><h4>Co udělat</h4><p>Tato výuka pracuje s právním stavem k 24. 11. 2026. Pokud zadání uvádí pozdější datum, zkontrolujte také znění účinné pro tento den. Obsahuje-li případ více dat, určete, ke kterému jednání se otázka vztahuje; nejpozdější datum nemusí být rozhodující.</p><p>Do „Použité znění účinné od“ opište datum uvedené u zvoleného znění předpisu. Neodhadujte ho. Pokud u textu na MPSV není začátek účinnosti jednoznačný, ověřte jej v e-Sbírce. Datum aktualizace webu nepoužívejte místo data účinnosti.</p></div>
           <dl class="guide-checks"><div><dt>Proč</dt><dd>Stejná otázka může mít po změně zákona jinou odpověď. Datum účinnosti znění a den, kdy text čtete, označují různé skutečnosti.</dd></div><div><dt>Poznám, že mám hotovo</dt><dd>Dokážete vysvětlit, proč jste použili právě toto znění pro den uvedený v zadání.</dd></div></dl>
-          <section class="guide-extra" aria-labelledby="guideDatesTitle"><h4 id="guideDatesTitle">Tři různá data: nezaměňujte je</h4><dl class="guide-reference"><div><dt>Právní stav k 24. 11. 2026</dt><dd>Den, pro který v této výuce posuzujete pravidla; zohledněte i pozdější datum uvedené v konkrétním zadání.</dd></div><div><dt>Datum Vašeho ověření</dt><dd>Skutečný den, kdy odpověď AI porovnáváte s právním předpisem.</dd></div><div><dt>Použité znění účinné od</dt><dd>Začátek účinnosti znění uvedený ve zvoleném právním zdroji. Opíšete jej z předpisu.</dd></div></dl></section>
+          <section class="guide-extra" aria-labelledby="guideDatesTitle"><h4 id="guideDatesTitle">Tři různá data: nezaměňujte je</h4><dl class="guide-reference"><div><dt>Právní stav k 24. 11. 2026</dt><dd>Den, pro který v této výuce posuzujete pravidla; zohledněte i pozdější datum uvedené v konkrétním zadání.</dd></div><div><dt>Datum Vašeho ověření</dt><dd>Skutečný den, kdy odpověď AI porovnáváte s právním předpisem.</dd></div><div><dt>Použité znění účinné od</dt><dd>Začátek účinnosti znění uvedený ve zvoleném právním zdroji. Opište jej z předpisu.</dd></div></dl></section>
         </li>
         <li class="guide-step" id="guide-step-6">
           <h3><span class="guide-number" aria-hidden="true">📚</span>Zapište právní důkaz a vlastní výklad</h3>
@@ -230,14 +230,14 @@ const cases = [
 const hints = [
   "Prověřte § 75 odst. 1 a 2 zákoníku práce.",
   "Prověřte § 76 odst. 2 a 3 zákoníku práce.",
-  "Prověřte § 35 odst. 1 a 2 zákoníku práce; Pro odlišení sjednání a následného prodloužení také § 35 odst. 4 a 5.",
-  "Prověřte § 34 odst. 1 a 2 zákoníku práce; § 37 odst. 1 zákoníku práce; Pro způsob určení mzdy také § 113 odst. 1 a 3.",
-  "Prověřte § 50 odst. 1 a 3 zákoníku práce; § 51 odst. 1 až 3 zákoníku práce.",
-  "Prověřte § 66 odst. 1 a 2 zákoníku práce; Pro ověření trvání zkušební doby také § 35.",
-  "Prověřte § 77 odst. 2 a 8 zákoníku práce; § 213 odst. 3 a 4 zákoníku práce; Při výpočtu délky také § 212 a § 216 odst. 5.",
+  "Prověřte § 35 odst. 1 až 3 zákoníku práce. Pro odlišení sjednání a následného prodloužení také § 35 odst. 4 a 5.",
+  "Prověřte § 34 odst. 1 a 2 a § 37 odst. 1 a 3 zákoníku práce. Pro způsob určení mzdy také § 113 odst. 1 a 3.",
+  "Prověřte § 50 odst. 1 a 3 a § 51 odst. 1 až 3 zákoníku práce.",
+  "Prověřte § 66 odst. 1 a 2 zákoníku práce. Pro ověření trvání zkušební doby také § 35.",
+  "Prověřte § 77 odst. 2 a 8 a § 213 odst. 3 a 4 zákoníku práce. Při výpočtu délky také § 212 a § 216 odst. 5.",
   "Prověřte § 88 odst. 1 až 4 zákoníku práce.",
-  "Prověřte § 241 odst. 2 zákoníku práce; Pro pojem kratší pracovní doba také § 80.",
-  "Prověřte § 52 písm. c) zákoníku práce; § 67 odst. 1 písm. c) a odst. 4 zákoníku práce; Pro formu a vymezení důvodu výpovědi také § 50 odst. 1, 2 a 4."
+  "Prověřte § 241 odst. 2 zákoníku práce. Pro pojem kratší pracovní doba také § 80.",
+  "Prověřte § 52 písm. c) a § 67 odst. 1 písm. c) a odst. 4 zákoníku práce. Pro formu a vymezení důvodu výpovědi také § 50 odst. 1, 2 a 4."
 ];
 const portraits = [7,2,3,4,5,6,9,1,8,10];
 let activeStorageKey=null;
@@ -357,8 +357,8 @@ window.AuditBridge={
 </script>
 <script src="firebase-config.js"></script>
 <script src="firebase-store.js"></script>
-<script src="classroom.js"></script>
-<script src="learning-content.js"></script>
-<script src="learning.js"></script>
+<script src="classroom.js?v=uvod-20261124"></script>
+<script src="learning-content.js?v=uvod-20261124"></script>
+<script src="learning.js?v=uvod-20261124"></script>
 </body>
 </html>
