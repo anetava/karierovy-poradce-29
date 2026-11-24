@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Výklad zákoníku práce, vyřešený vzor a deset auditů AI. Vlastní zápisy se automaticky ukládají pro vyučující.">
+  <meta name="description" content="Výklad zákoníku práce, vyřešený vzor a deset auditů AI. Samostatný nácvik s uložením odpovědí v prohlížeči.">
   <title>Právní audit AI | Legislativa kariérového poradce</title>
   <style>
     :root {
@@ -70,29 +70,11 @@
 <header class="hero"><div class="hero-copy"><div class="eyebrow">Legislativa kariérového poradce</div><h1>Právní audit <em>AI.</em></h1><p>Deset modelových situací. Nejdřív odpověď AI. Potom konkrétní paragraf, vlastní úsudek a doporučení klientovi.</p><div class="eyebrow">Individuální práce · 24. listopadu 2026</div></div><div class="hero-photo" role="img" aria-label="Ilustrační fotografie profesionálky v pracovním prostředí"></div></header>
 <main class="wrap">
   <section id="learning-work" data-learning-panel="work" aria-label="Moje práce">
-  <section class="classroom" aria-labelledby="classModeText">
-    <div class="classroom-top"><div><h2 id="classModeText">Začněte svým jménem</h2><p id="classJoinLead">Zadejte jméno a příjmení a zvolte „Začít pracovat“.</p></div></div>
-    <p id="auditPrivacyBrief">Vyučující vidí Vaše jméno, rozpracované odpovědi i jejich uložené verze.</p>
-
-    <div id="classJoin">
-      <form id="classForm" class="classroom-form">
-        <div><label for="className">Jméno a příjmení</label><input id="className" type="text" minlength="2" maxlength="80" autocomplete="off" placeholder="Například Jana Nováková" aria-describedby="classJoinLead auditPrivacyBrief" required></div>
-        <button id="classJoinButton" disabled class="btn" type="submit">Začít pracovat</button>
-      </form>
-      <small>Na tomto zařízení stačí jméno zadat jednou. Příště se Váš pracovní list otevře automaticky.</small>
-    </div>
-    <div id="classActive" hidden><p id="classIdentity" class="classroom-name"></p><p id="classSync" class="classroom-status" role="status" aria-live="polite"></p></div>
-    <div id="classResume" class="classroom-resume" hidden><p id="classResumeText"></p><button id="classResumeButton" type="button" class="btn secondary">Zkusit připojení znovu</button></div>
-    <div class="classroom-utility"><button id="classForget" type="button" class="btn quiet" hidden>Ukončit práci na tomto zařízení</button><button id="classConflict" type="button" class="btn secondary" hidden>Vyřešit rozdíl</button><button id="classResetEntry" type="button" class="btn quiet" hidden>Začít nový vstup</button></div>
-    <p id="classError" role="alert" hidden></p>
-    <p id="classSelectionNote" role="status" hidden>Vyučující teď v přehledu neuvidí Vaši poslední volbu případu. Stav ukládání odpovědí najdete u pracovního listu.</p>
-    <details class="classroom-options"><summary>Moje kopie a obnovení práce</summary><p>Vyučující vidí uložené odpovědi a poslední případ, který jste si sami vybrali. Aplikace nesleduje dobu čtení, Vaši obrazovku ani práci v dalších kartách. Ostatní studenti se k Vašim zápisům nedostanou.</p><div class="classroom-actions"><button id="classLocalBackup" disabled type="button" class="btn secondary">Stáhnout mou kopii</button></div><p id="classBackupStatus" role="status" aria-live="polite"></p><p>Záloha JSON obsahuje Vaše odpovědi. Uložte ji na vlastní zařízení nebo osobní úložiště. Po ztrátě přístupu otevřete nový list a zvolte „Načíst moji zálohu“. Vyučující si původní záznam může dohledat. Na sdíleném počítači před odchodem zvolte „Ukončit práci na tomto zařízení“ a odstraňte své případné stažené kopie.</p></details>
-  </section>
-  <div class="intro"><p id="introMode">Napište nahoře jméno a vyberte případ. Výklad i vzor můžete otevřít kdykoliv.</p><span class="pill">10 případových karet</span></div>
+  <div class="intro"><p id="introMode">Vyberte případ a začněte psát. Odpovědi se ukládají v tomto prohlížeči. Výklad i vzor můžete otevřít kdykoliv.</p><span class="pill">10 případových karet</span></div>
   <details class="student-guide" id="studentGuide">
     <summary><span class="guide-summary-copy"><strong id="guideTitle">Návod krok za krokem</strong><span>Začínáte? Otevřete 10 kroků s vysvětlením, co udělat, proč a jak poznáte, že máte hotovo.</span></span></summary>
     <div class="guide-content" role="region" aria-labelledby="guideTitle">
-      <p class="guide-purpose">Cílem je doložit, zda odpověď AI obstojí při porovnání s právním předpisem. Výsledkem je Váš vlastní odůvodněný závěr a doporučení klientovi. Po zadání jména pracujete ve vlastním pracovním listu. Zápisy se ukládají automaticky a vyučující vidí i rozepsané odpovědi. Vlastní kopii si můžete stáhnout.</p>
+      <p class="guide-purpose">Cílem je doložit, zda odpověď AI obstojí při porovnání s právním předpisem. Výsledkem je Váš vlastní odůvodněný závěr a doporučení klientovi. Pracujete samostatně. Zápisy se ukládají automaticky v tomto prohlížeči. Vlastní kopii si můžete stáhnout.</p>
       <p class="guide-before"><strong>Než začnete:</strong> Ponechte si otevřenou kartu s auditem. Ve druhé kartě používejte vlastní AI a v další právní předpis. Audit sám odpovědi AI nevytváří. Do AI přenášejte pouze modelové zadání z aplikace, bez osobních údajů skutečných klientů.</p>
       <ol class="guide-steps">
         <li class="guide-step" id="guide-step-1">
@@ -144,15 +126,14 @@
         </li>
         <li class="guide-step" id="guide-step-10">
           <h3><span class="guide-number" aria-hidden="true">💾</span>Zkontrolujte uložení a pokračujte</h3>
-          <div class="guide-do"><h4>Co udělat</h4><p>U Vašeho jména sledujte stav „Uloženo pro vyučující“. Zápisy se ukládají samy během psaní. Nic nemusíte ručně odevzdávat.</p><p>Pokud vidíte „Čeká na připojení“, můžete pokračovat. Rozepsaný text zůstává v tomto prohlížeči a aplikace odeslání opakuje. Před zavřením stránky vyčkejte na potvrzení, nebo si stáhněte vlastní kopii.</p><p>Další případ otevřete v seznamu. Ke každému případu se můžete vrátit. Na společném počítači před odchodem použijte „Ukončit práci na tomto zařízení“, aby po Vás další člověk nepracoval pod Vaším jménem.</p></div>
-          <dl class="guide-checks"><div><dt>Proč</dt><dd>Vyučující vidí jen změny, které už byly přijaty při ukládání. Přerušení připojení proto musí být vidět.</dd></div><div><dt>Poznám, že mám hotovo</dt><dd>U pracovního listu je potvrzené uložení. V přehledu případů je u dokončeného auditu značka vyplnění.</dd></div></dl>
-          <section class="guide-extra" aria-labelledby="guideExportsTitle"><h4 id="guideExportsTitle">Volitelná vlastní kopie</h4><dl class="guide-reference"><div><dt>Stáhnout odpovědi TXT</dt><dd>Čitelný přehled Vašich odpovědí.</dd></div><div><dt>Stáhnout zálohu JSON</dt><dd>Soubor, ze kterého lze později znovu načíst záznamy. Přihlašovací údaje do souboru nepatří.</dd></div><div><dt>Načíst moji zálohu</dt><dd>Po Vašem potvrzení vloží vybrané zápisy do právě otevřeného pracovního listu. Uvidí je také vyučující.</dd></div><div><dt>Tisk aktuální úlohy</dt><dd>Vytiskne právě otevřený případ a jeho odpovědi.</dd></div></dl></section>
+          <div class="guide-do"><h4>Co udělat</h4><p>Odpovědi se ukládají během psaní v tomto prohlížeči. Před odchodem si stáhněte odpovědi TXT nebo zálohu JSON přes „Vlastní kopie, záloha a tisk“. Zálohu lze později načíst i na jiném zařízení. Na sdíleném počítači mohou místní odpovědi vidět další uživatelé stejného prohlížeče.</p></div>
+          <section class="guide-extra" aria-labelledby="guideExportsTitle"><h4 id="guideExportsTitle">Volitelná vlastní kopie</h4><dl class="guide-reference"><div><dt>Stáhnout odpovědi TXT</dt><dd>Čitelný přehled Vašich odpovědí.</dd></div><div><dt>Stáhnout zálohu JSON</dt><dd>Soubor, ze kterého lze později znovu načíst záznamy. Přihlašovací údaje do souboru nepatří.</dd></div><div><dt>Načíst moji zálohu</dt><dd>Po Vašem potvrzení vloží vybrané zápisy do právě otevřeného pracovního listu.</dd></div><div><dt>Tisk aktuální úlohy</dt><dd>Vytiskne právě otevřený případ a jeho odpovědi.</dd></div></dl></section>
         </li>
       </ol>
     </div>
   </details>
-  <p id="workGate" class="work-gate">Pro vlastní odpovědi nejdřív napište nahoře jméno a klikněte na „Začít pracovat“.</p>
-  <fieldset id="auditFields" disabled>
+
+  <fieldset id="auditFields">
   <legend class="sr-only">Vlastní pracovní list</legend>
   <details class="export-options"><summary>Vlastní kopie, záloha a tisk</summary>
   <div class="toolbar" aria-label="Práce s vlastními záznamy"><button class="btn secondary" id="export" type="button">Stáhnout odpovědi TXT</button><button class="btn secondary" id="backup" type="button">Stáhnout zálohu JSON</button><button class="btn quiet" id="importButton" type="button">Načíst moji zálohu</button><button class="btn quiet" id="print" type="button">Tisk aktuální úlohy</button><input type="file" id="importFile" accept=".json,application/json" hidden></div></details>
@@ -172,7 +153,7 @@
   </div>
   </fieldset>
   </section>
-  <footer class="footer"><p>Po zadání jména se Vaše nové zápisy průběžně ukládají pro vyučující. Dřívější soukromé odpovědi se automaticky nepřenášejí. Pro vlastní uchování můžete stáhnout TXT nebo zálohu JSON.</p><p>Všechny situace jsou modelové. Do AI nevkládejte osobní údaje skutečných klientů. Po vymazání dat prohlížeče se na tomto zařízení neobnoví Váš původní pracovní list. Již odeslaná práce zůstane u vyučující. Pro pokračování používejte stejný běžný prohlížeč. Fotografie jsou ilustrační.</p><p><a href="https://anetava.github.io/karierovy-poradce-29/">Zpět na původních 20 kazuistik</a></p></footer>
+  <footer class="footer"><p>Samostatný nácvik. Odpovědi zůstávají v tomto prohlížeči. Pro vlastní uchování stáhněte TXT nebo zálohu JSON. Vymazáním dat prohlížeče se místní odpovědi ztratí.</p><p>Všechny situace jsou modelové. Do AI nevkládejte osobní údaje skutečných klientů. Fotografie jsou ilustrační.</p></footer>
 </main>
 <article class="print-report" id="printReport" aria-label="Tisk aktuálního právního auditu"></article>
 <script>
@@ -252,7 +233,7 @@ const hints = [
   "Prověřte § 52 písm. c) a § 67 odst. 1 písm. c) a odst. 4 zákoníku práce. Pro formu a vymezení důvodu výpovědi také § 50 odst. 1, 2 a 4."
 ];
 const portraits = [7,2,3,4,5,6,9,1,8,10];
-let activeStorageKey=null;
+let activeStorageKey='pravni-audit-ai-samostatny-v1';
 let lastNotified=Object.create(null);
 const APP = 'pravni-audit-ai';
 const FIELD_LABELS = {tool:'AI nástroj a model',checkedAt:'Datum ověření',ai:'Skutečná odpověď AI',law:'Předpis, paragraf a odstavec',effective:'Použité znění účinné od',source:'Přesný odkaz na zdroj',quote:'Citace z právního předpisu',meaning:'Výklad a použití na případ',verdict:'Hodnocení odpovědi AI',assessment:'Odůvodnění hodnocení',advice:'Doporučení klientovi'};
@@ -295,7 +276,7 @@ function persist(){
   updateSaveState();
 }
 function readForm(){const record=Object.fromEntries(keys.map(k=>[k,el(k).value]));record.readConfirmed=el('readConfirmed').checked;return record;}
-function store(){if(!opened||!window.AuditClassroom?.isReady())return;const previous=all[current]||{};const record=readForm();const changed=[...keys,'readConfirmed'].some(k=>record[k]!==previous[k]);record.complete=!changed&&previous.complete===true;record.completedAt=record.complete?text(previous.completedAt):'';all[current]=record;persist();renderProgress();renderCompletion();}
+function store(){if(!opened)return;const previous=all[current]||{};const record=readForm();const changed=[...keys,'readConfirmed'].some(k=>record[k]!==previous[k]);record.complete=!changed&&previous.complete===true;record.completedAt=record.complete?text(previous.completedAt):'';all[current]=record;persist();renderProgress();renderCompletion();}
 function renderProgress(){
   let done=0;
   cases.forEach((c,i)=>{const complete=isComplete(all[i]);if(complete)done++;const b=el('nav').children[i];if(b){b.classList.toggle('active',i===current);b.setAttribute('aria-current',i===current?'true':'false');b.querySelector('.done').textContent=complete?'✓':'';b.setAttribute('aria-label',`${i+1}. ${c[0]}${complete?' – audit vyplněn':''}`);}el('caseSelect').options[i].textContent=`${String(i+1).padStart(2,'0')} · ${c[0]}${complete?' ✓':''}`;});
@@ -331,21 +312,21 @@ function exportText(){store();let out='PRÁVNÍ AUDIT AI — MOJE ODPOVĚDI\nVý
 function exportBackup(){store();const backup={app:APP,version:2,exportedAt:new Date().toISOString(),studyDate:'2026-11-24',records:all};download(JSON.stringify(backup,null,2),'application/json;charset=utf-8','moje_pravni_audity_zaloha.json');}
 function importRecords(parsed){if(parsed&&parsed.app===APP){if(parsed.version!==2)throw new Error('Tato verze zálohy není podporovaná.');return sanitizeRecords(parsed.records,true);}if(parsed&&Object.keys(parsed).every(k=>/^[0-9]$/.test(k)))return sanitizeRecords(parsed,true);throw new Error('Soubor není záloha Právního auditu AI.');}
 async function importBackup(file){
-  if(!window.AuditClassroom?.isReady()){el('importStatus').textContent='Nejdřív otevřete svůj pracovní list zadáním jména.';el('importStatus').hidden=false;return;}
-  if(!file)return;const identity=window.AuditClassroom.getWorkspaceId();el('importStatus').hidden=true;try{
+  if(!file)return;const identity=activeStorageKey;el('importStatus').hidden=true;try{
     if(file.size>10000000)throw new Error('Soubor je příliš velký. Zvolte JSON zálohu této aplikace (do 10 MB).');
     const parsed=JSON.parse((await file.text()).replace(/^\uFEFF/,''));const incoming=importRecords(parsed);const ids=Object.keys(incoming);if(!ids.length)throw new Error('Záloha neobsahuje žádný záznam.');
-    if(!window.AuditClassroom.isReady()||window.AuditClassroom.getWorkspaceId()!==identity)return;
-    if(!confirm('Načíst zálohu do právě otevřeného pracovního listu? Obsažené odpovědi se uloží také pro vyučující.'))return;
+    if(activeStorageKey!==identity)return;
+    if(!confirm('Načíst zálohu do právě otevřeného pracovního listu? Obsažené odpovědi nahradí stejné případy v místním listu.'))return;
     store();const overlap=ids.filter(id=>all[id]&&keys.some(k=>text(all[id][k]).trim())&&JSON.stringify(all[id])!==JSON.stringify(incoming[id]));
     if(overlap.length&&!confirm(`Načtení nahradí Vaše současné záznamy u ${overlap.length} případů obsažených v záloze. Ostatní záznamy zůstanou. Chcete pokračovat? Před nahrazením si můžete stáhnout současnou zálohu.`)){el('importStatus').textContent='Načtení bylo zrušeno. Vaše záznamy zůstaly beze změny.';el('importStatus').hidden=false;return;}
-    ids.forEach(id=>all[id]=incoming[id]);persist();ids.forEach(id=>{lastNotified[id]=JSON.stringify(all[id]);window.dispatchEvent(new CustomEvent('audit:changed',{detail:{caseId:Number(id),record:JSON.parse(lastNotified[id])}}));});opened=false;openCase(current,true);el('importStatus').textContent=`Načteno ${ids.length} záznamů. ${storageFailure?'Práce je dostupná v této stránce; trvalé ukládání není dostupné. Před zavřením stáhněte JSON zálohu.':'Záznamy jsou načtené. Sledujte potvrzení uložení pro vyučující.'}`;el('importStatus').hidden=false;
+    ids.forEach(id=>all[id]=incoming[id]);persist();ids.forEach(id=>{lastNotified[id]=JSON.stringify(all[id]);window.dispatchEvent(new CustomEvent('audit:changed',{detail:{caseId:Number(id),record:JSON.parse(lastNotified[id])}}));});opened=false;openCase(current,true);el('importStatus').textContent=`Načteno ${ids.length} záznamů. ${storageFailure?'Práce je dostupná v této stránce; trvalé ukládání není dostupné. Před zavřením stáhněte JSON zálohu.':'Záznamy jsou načtené do tohoto prohlížeče.'}`;el('importStatus').hidden=false;
   }catch(error){el('importStatus').textContent='Zálohu se nepodařilo načíst. '+(error instanceof SyntaxError?'Soubor není platný JSON.':error.message)+' Vaše dosavadní záznamy nebyly nahrazené.';el('importStatus').hidden=false;}
   finally{el('importFile').value='';}
 }
 function appendPrint(tag,content,parent=el('printReport')){const node=document.createElement(tag);node.textContent=content;parent.append(node);return node;}
 function renderPrint(){store();const report=el('printReport');report.replaceChildren();const c=cases[current],r=all[current]||{};appendPrint('h1','Právní audit AI');const meta=appendPrint('p',`Případ ${current+1} / ${cases.length} · ${c[0]}\nVýuka: 24. 11. 2026\n${isComplete(r)?'Audit označený jako vyplněný':'Audit rozpracovaný'} · Úplnost evidence není hodnocením právní správnosti.`);meta.className='print-meta';appendPrint('h2','Situace klienta');appendPrint('p',c[2]);appendPrint('h3','Úkol');appendPrint('p',c[3]);keys.forEach(k=>{const box=document.createElement('section');box.className='print-entry';appendPrint('h3',FIELD_LABELS[k],box);appendPrint('p',text(r[k])||'—',box);report.append(box);});appendPrint('p','Potvrzuji vlastní přečtení ustanovení a jeho ověření: '+(r.readConfirmed?'ano':'ne'));}
-initNav();const initial=/^#pripad-(10|[1-9])$/.exec(location.hash);openCase(initial?Number(initial[1])-1:0,true);if(loadFailure){persist();}else updateSaveState(storageFailure?null:'Vlastní odpovědi začnete vyplňovat po zadání jména.');
+try{const saved=localStorage.getItem(activeStorageKey);if(saved)all=sanitizeRecords(JSON.parse(saved));}catch{loadFailure=true;storageFailure=true;}
+initNav();const initial=/^#pripad-(10|[1-9])$/.exec(location.hash);openCase(initial?Number(initial[1])-1:0,true);if(loadFailure){persist();}else updateSaveState();
 keys.forEach(k=>el(k).addEventListener(k==='verdict'?'change':'input',store));el('readConfirmed').addEventListener('change',store);el('caseSelect').addEventListener('change',()=>openCase(Number(el('caseSelect').value)));el('prev').addEventListener('click',()=>openCase(current-1));el('next').addEventListener('click',()=>openCase(current+1));el('complete').addEventListener('click',checkCompletion);el('copyPrompt').addEventListener('click',copyPrompt);el('showPrompt').addEventListener('click',()=>{if(el('promptFallback').hidden){revealPrompt();el('copyStatus').textContent='Náhled zadání. Pro zkopírování použijte tlačítko „Kopírovat zadání pro AI“, nebo si text označte a zkopírujte ručně.';}else{hidePrompt();el('copyStatus').textContent='';}});el('export').addEventListener('click',exportText);el('backup').addEventListener('click',exportBackup);el('importButton').addEventListener('click',()=>el('importFile').click());el('importFile').addEventListener('change',()=>importBackup(el('importFile').files[0]));el('print').addEventListener('click',()=>{renderPrint();window.print();});window.addEventListener('beforeprint',renderPrint);window.addEventListener('pagehide',store);window.addEventListener('beforeunload',event=>{store();if(storageFailure&&Object.values(all).some(record=>keys.some(k=>text(record[k]).trim()))){event.preventDefault();event.returnValue='';}});
 
 window.AuditBridge={
@@ -367,10 +348,11 @@ window.AuditBridge={
  }
 };
 </script>
-<script src="firebase-config.js"></script>
-<script src="firebase-store.js"></script>
-<script src="classroom.js?v=uvod-20261124"></script>
+
+
+
 <script src="learning-content.js?v=uvod-20261124"></script>
 <script src="learning.js?v=uvod-20261124"></script>
+<script>if('serviceWorker' in navigator && isSecureContext)navigator.serviceWorker.register('./offline-worker.js').catch(()=>{});</script>
 </body>
 </html>
