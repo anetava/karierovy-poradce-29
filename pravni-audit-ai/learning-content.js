@@ -5,7 +5,7 @@ window.AuditLearningContent = {
   "versionDate": "1. 11. 2026",
   "sources": {
     "law": "https://ppropo.mpsv.cz/zakon_262_2006",
-    "esbirka": "https://e-sbirka.gov.cz/sb/2006/262?odkazId=213229133",
+    "esbirka": "https://e-sbirka.gov.cz/sb/2006/262",
     "app": "https://anetava.github.io/karierovy-poradce-29/pravni-audit-ai/",
     "contract": "https://ppropo.mpsv.cz/IV12Pracovnismlouvaajejiobsah",
     "dpp": "https://ppropo.mpsv.cz/VII2Dohodaoprovedeniprace",
