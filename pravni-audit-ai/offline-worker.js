@@ -20,7 +20,9 @@ self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(cacheName);
     await cache.addAll([...publicUrls].map(url => new Request(url, {cache:'reload', credentials:'omit'})));
-    // An update waits until tabs using the previous worksheet have closed.
+    // Switch future navigations only after the whole release is available.
+    // Open worksheets keep their current document and in-memory form.
+    await self.skipWaiting();
   })());
 });
 self.addEventListener('activate', event => {

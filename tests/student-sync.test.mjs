@@ -147,12 +147,13 @@ test('offline navigation serves the cached public shell and excludes all teacher
  const base='https://example.test/karierovy-poradce-29/pravni-audit-ai/';
  const stored=new Map(),events=new Map(),removed=[];
  const cache={addAll:async requests=>{for(const r of requests){assert.equal(r.credentials,'omit');stored.set(r.url,new Response(r.url));}},match:async key=>stored.get(key)?.clone()};
- const env={self:{location:new URL('offline-worker.js',base),clients:{claim:async()=>{}},skipWaiting:async()=>{},addEventListener:(name,fn)=>events.set(name,fn)},URL,Request,Promise,
+ let assetsAtActivation;
+ const env={self:{location:new URL('offline-worker.js',base),clients:{claim:async()=>{}},skipWaiting:async()=>{assetsAtActivation=stored.size;},addEventListener:(name,fn)=>events.set(name,fn)},URL,Request,Promise,
    caches:{open:async()=>cache,keys:async()=>['pravni-audit-ai-public-shell:/karierovy-poradce-29/pravni-audit-ai/:old','jinypredmet'],delete:async name=>removed.push(name)},
    fetch:async()=>{throw new TypeError('offline');}};
  vm.runInNewContext(worker,env);
  async function run(name,parts){let result;events.get(name)({...parts,waitUntil:r=>{result=r;},respondWith:r=>{result=r;}});return result;}
- await run('install');await run('activate');
+ await run('install');assert.equal(assetsAtActivation,20);await run('activate');
  assert.equal(stored.size,20);assert.deepEqual(removed,['pravni-audit-ai-public-shell:/karierovy-poradce-29/pravni-audit-ai/:old']);
  const cached=await run('fetch',{request:new Request(base)});assert.equal(await cached.text(),base+'index.html');
  assert.equal(await (await run('fetch',{request:new Request(base+'#moje-prace')})).text(),base+'index.html');
