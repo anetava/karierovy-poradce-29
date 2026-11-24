@@ -104,7 +104,7 @@ window.AuditLearningContent = {
       "bottom": "Otevřete obsah zákona. Najdete dovolenou i bez znalosti čísla paragrafu?",
       "note": "V e-Sbírce otevřete část devátou a najděte § 213. Všimněte si rozdílu mezi nadpisem celé části a pravidlem pro poměrnou část dovolené.",
       "n": 4,
-      "explanation": "Zákoník práce je dlouhý. Nemusíte ho číst od začátku při každém dotazu. Nejprve si otázku přeložte do tématu: „Kdy mohu odejít?“ znamená skončení pracovního poměru. „Mohu mít kratší směny kvůli dítěti?“ znamená pracovní dobu a péči o dítě. Tabulka ukazuje, kde začít hledat."
+      "explanation": "Zákoník práce je dlouhý. Nemusíte ho číst od začátku při každém dotazu. Nejprve si otázku přeložte do tématu: „Kdy mohu odejít?“ znamená skončení pracovního poměru. „Mohu mít kratší směny kvůli dítěti?“ znamená pracovní dobu a péči o dítě. Přehled níže ukazuje, kde začít hledat."
     },
     {
       "n": 5,
@@ -556,7 +556,7 @@ window.AuditLearningContent = {
       "items": [
         [
           "Co víte",
-          "Zaměstnanec doručil běžnou písemnou výpověď 12. srpna. Platí dvouměsíční výpovědní doba a strany její běh neupravily."
+          "Zaměstnanec doručil běžnou písemnou výpověď 12. srpna 2026. Platí dvouměsíční výpovědní doba a strany její běh neupravily."
         ],
         [
           "Jak na kalendář",

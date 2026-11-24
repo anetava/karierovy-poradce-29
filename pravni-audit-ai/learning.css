@@ -175,3 +175,5 @@
 .slide-introduction{border-left:4px solid var(--blue);padding:4px 20px;margin:0 0 28px;background:var(--periwinkle-light)}
 .slide-introduction p{font-size:18px;line-height:1.8;margin:12px 0}
 @media(max-width:560px){.slide-introduction{padding:3px 14px}.slide-introduction p{font-size:16px}}
+
+@media(max-width:800px){.field input,.field textarea,.field select,.mobile-picker select,.slide-tools select{font-size:16px;min-height:44px}}

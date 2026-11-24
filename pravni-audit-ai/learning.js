@@ -65,7 +65,10 @@
       else if(s.links)body+='<div class="learning-actions">'+s.links.map(x=>sourceLink(x[1])).join('')+'</div>';
       else body+=paragraphs(s.body);
     }
-    if(s.explanation)body='<div class="slide-introduction">'+paragraphs(s.explanation)+'</div>'+body;
+    if(s.explanation){
+      const introduction='<div class="slide-introduction">'+paragraphs(s.explanation)+'</div>';
+      body=body.replace('</h3>','</h3>'+introduction);
+    }
     if(s.bottom)body+='<div class="slide-bottom">'+esc(s.bottom)+'</div>';
     document.getElementById('slideStage').innerHTML=body;
     const sourcebar=document.getElementById('slideSources');

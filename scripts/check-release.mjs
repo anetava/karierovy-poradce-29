@@ -37,9 +37,8 @@ assert.equal(hash(rootHtml.replace(currentTeaser, 'Výsledky si ponecháte u seb
 const learning={window:{}};
 vm.runInNewContext(readFileSync(resolve(root,'learning-content.js'),'utf8'),learning);
 assert.equal(learning.window.AuditLearningContent.slides.length,28);
-const notice = 'id="auditPrivacyBrief"';
-assert(current.indexOf(notice) >= 0 && current.indexOf(notice) < current.indexOf('id="className"'),
-  'Informace o zpracování údajů musí být přítomna před vstupem studenta.');
+assert(!/<script[^>]+src=["'](?:firebase-store|classroom)\.js/.test(current), 'Samostatný nácvik nesmí spouštět sdílené ukládání.');
+assert(!current.includes('id="auditFields" disabled'), 'Pracovní list musí být dostupný bez přihlášení.');
 const rulesHash = hash(readFileSync('firebase/firestore.rules'));
 assert(readFileSync('scripts/verify-live-firebase.py','utf8').includes(rulesHash),
   'Kontrolní skript používá odlišnou verzi pravidel.');
