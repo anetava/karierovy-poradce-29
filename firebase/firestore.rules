@@ -1,0 +1,137 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function student(uid) {
+      return request.auth != null && request.auth.uid == uid
+        && request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+    function teacher() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == 'aneta.vadovicova@gmail.com';
+    }
+    function profilePath(uid) { return /databases/$(database)/documents/courses/pravni-audit-ai/students/$(uid); }
+    function casePath(uid, id) { return /databases/$(database)/documents/courses/pravni-audit-ai/students/$(uid)/cases/$(id); }
+    function historyPath(uid, id, mutation) { return /databases/$(database)/documents/courses/pravni-audit-ai/students/$(uid)/cases/$(id)/history/$(mutation); }
+    function validCase(id) { return id is string && id.matches('[0-9]'); }
+    function validMutation(id) { return id is string && id.matches('[A-Za-z0-9_-]{16,80}'); }
+    function exactKeys(data, keys) { return data.keys().hasAll(keys) && data.keys().hasOnly(keys); }
+    function text(value, maximum) { return value is string && value.size() <= maximum; }
+    function filled(value) { return value.trim().size() > 0; }
+    function validDate(value) {
+      let year = int(value[0:4]);
+      let month = int(value[5:7]);
+      let day = int(value[8:10]);
+      let leap = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
+      let maximum = month == 2 ? (leap ? 29 : 28) : (month in [4, 6, 9, 11] ? 30 : 31);
+      return value.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}') && year > 0
+        && month >= 1 && month <= 12 && day >= 1 && day <= maximum;
+    }
+    function completedRecord(r) {
+      return filled(r.tool) && filled(r.ai) && filled(r.law) && filled(r.quote)
+        && filled(r.meaning) && filled(r.verdict) && filled(r.assessment) && filled(r.advice)
+        && r.readConfirmed && validDate(r.checkedAt) && validDate(r.effective)
+        && r.source.matches('https?://[^/\\s?#]+[^\\s]*')
+        && r.completedAt.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,3})?Z')
+        && validDate(r.completedAt[0:10]);
+    }
+    function validRecord(r) {
+      return r is map && exactKeys(r, ['tool', 'checkedAt', 'ai', 'law', 'effective', 'source', 'quote', 'meaning', 'verdict', 'assessment', 'advice', 'readConfirmed', 'complete', 'completedAt'])
+        && text(r.tool, 120) && text(r.checkedAt, 10) && text(r.ai, 60000)
+        && text(r.law, 600) && text(r.effective, 10) && text(r.source, 2048)
+        && text(r.quote, 12000) && text(r.meaning, 20000) && text(r.verdict, 100)
+        && text(r.assessment, 20000) && text(r.advice, 20000) && text(r.completedAt, 40)
+        && r.readConfirmed is bool && r.complete is bool
+        && r.verdict in ['', 'Správná', 'Částečně správná', 'Nesprávná', 'Nelze rozhodnout bez dalších údajů']
+        && (r.complete ? completedRecord(r) : r.completedAt == '');
+    }
+    function summary(c) {
+      let r = c.record;
+      return {
+        'revision': c.revision, 'savedAt': c.savedAt, 'complete': r.complete,
+        'hasAi': filled(r.ai),
+        'hasEvidence': filled(r.law) && filled(r.source) && filled(r.quote),
+        'hasConclusion': filled(r.assessment) && filled(r.advice),
+        'hasContent': filled(r.tool) || filled(r.checkedAt) || filled(r.ai) || filled(r.law)
+          || filled(r.effective) || filled(r.source) || filled(r.quote) || filled(r.meaning)
+          || filled(r.verdict) || filled(r.assessment) || filled(r.advice)
+      };
+    }
+    function validProfile(data) {
+      let required = ['displayName', 'joinedAt', 'noticeVersion', 'lastSavedAt', 'lastCaseId', 'caseSummaries'];
+      return data.keys().hasAll(required) && data.keys().hasOnly(required.concat(['selectedCaseId']))
+        && (!('selectedCaseId' in data) || validCase(data.selectedCaseId))
+        && data.displayName is string && data.displayName == data.displayName.trim()
+        && data.displayName.size() >= 2 && data.displayName.size() <= 80
+        && data.joinedAt is timestamp && data.noticeVersion == '2026-11-23'
+        && data.caseSummaries is map && data.caseSummaries.keys().hasOnly(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+    }
+    function selectionUpdate(data) {
+      return data.diff(resource.data).affectedKeys().hasOnly(['selectedCaseId'])
+        && 'selectedCaseId' in data && validCase(data.selectedCaseId);
+    }
+    function profileUpdate(uid, data) {
+      let id = data.lastCaseId;
+      let afterCase = getAfter(casePath(uid, id)).data;
+      let previousRevision = id in resource.data.caseSummaries ? resource.data.caseSummaries[id].revision : 0;
+      return validProfile(data) && validCase(id)
+        && data.diff(resource.data).affectedKeys().hasOnly(['lastSavedAt', 'lastCaseId', 'caseSummaries'])
+        && data.caseSummaries.diff(resource.data.caseSummaries).affectedKeys().hasOnly([id])
+        && data.lastSavedAt == request.time && afterCase.savedAt == request.time
+        && afterCase.revision == previousRevision + 1
+        && data.caseSummaries[id] == summary(afterCase);
+    }
+    function caseWrite(uid, id, data, previousRevision) {
+      let afterProfile = getAfter(profilePath(uid)).data;
+      let afterHistory = getAfter(historyPath(uid, id, data.lastMutationId)).data;
+      return validCase(id) && exactKeys(data, ['record', 'revision', 'lastMutationId', 'savedAt'])
+        && validRecord(data.record) && validMutation(data.lastMutationId)
+        && data.revision is int && data.revision == previousRevision + 1 && data.revision <= 1000001
+        && data.savedAt == request.time
+        && !exists(historyPath(uid, id, data.lastMutationId))
+        && afterHistory.record == data.record && afterHistory.revision == data.revision
+        && afterHistory.mutationId == data.lastMutationId && afterHistory.baseRevision == previousRevision
+        && afterHistory.savedAt == request.time
+        && afterProfile.lastCaseId == id && afterProfile.lastSavedAt == request.time
+        && afterProfile.caseSummaries[id] == summary(data);
+    }
+    function historyCreate(uid, id, mutation, data) {
+      let afterCase = getAfter(casePath(uid, id)).data;
+      let previousRevision = exists(casePath(uid, id)) ? get(casePath(uid, id)).data.revision : 0;
+      return validCase(id) && validMutation(mutation)
+        && exactKeys(data, ['record', 'revision', 'baseRevision', 'mutationId', 'savedAt'])
+        && data.baseRevision == previousRevision && data.revision == previousRevision + 1
+        && data.mutationId == mutation && data.savedAt == request.time
+        && afterCase.lastMutationId == mutation && afterCase.revision == data.revision
+        && afterCase.record == data.record && afterCase.savedAt == request.time;
+    }
+
+    match /courses/pravni-audit-ai/students/{uid} {
+      allow get: if student(uid) || teacher();
+      allow list: if teacher();
+      allow create: if student(uid) && validProfile(request.resource.data)
+        && !('selectedCaseId' in request.resource.data)
+        && request.resource.data.joinedAt == request.time
+        && request.resource.data.lastSavedAt == null && request.resource.data.lastCaseId == null
+        && request.resource.data.caseSummaries.size() == 0;
+      allow update: if student(uid)
+        && (selectionUpdate(request.resource.data) || profileUpdate(uid, request.resource.data));
+      allow delete: if false;
+
+      match /cases/{id} {
+        allow read: if student(uid) || teacher();
+        allow create: if student(uid) && caseWrite(uid, id, request.resource.data, 0);
+        allow update: if student(uid) && caseWrite(uid, id, request.resource.data, resource.data.revision);
+        allow delete: if false;
+
+        match /history/{mutation} {
+          allow read: if student(uid) || teacher();
+          allow create: if student(uid) && historyCreate(uid, id, mutation, request.resource.data);
+          allow update, delete: if false;
+        }
+      }
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

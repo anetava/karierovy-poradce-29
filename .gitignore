@@ -1,0 +1,12 @@
+node_modules
+.firebase/
+*-debug.log
+firebase-debug.log*
+firestore-debug.log
+ui-debug.log
+coverage/
+test-results/
+.env*
+!**/.env.example
+
+__pycache__/

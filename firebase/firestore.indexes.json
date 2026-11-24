@@ -1,0 +1,8 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "cases", "fieldPath": "record", "indexes": [] },
+    { "collectionGroup": "history", "fieldPath": "record", "indexes": [] },
+    { "collectionGroup": "students", "fieldPath": "caseSummaries", "indexes": [] }
+  ]
+}

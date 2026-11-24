@@ -83,7 +83,7 @@
   function complete(record){return !!record&&record.complete===true&&record.readConfirmed===true&&FIELD_KEYS.every(key=>present(record[key]))&&validDate(record.checkedAt)&&validDate(record.effective)&&!!safeUrl(record.source)&&['Správná','Částečně správná','Nesprávná','Nelze rozhodnout bez dalších údajů'].includes(record.verdict);}
   function status(summary){if(!summary||!summary.hasContent)return {label:'Bez vyplněného zápisu',kind:'empty'};if(summary.complete)return {label:'Audit vyplněn',kind:'complete'};if(summary.hasConclusion)return {label:'Zapsán vlastní závěr',kind:'progress'};if(summary.hasEvidence)return {label:'Zapsán právní důkaz',kind:'progress'};if(summary.hasAi)return {label:'Vložena odpověď AI',kind:'progress'};return {label:'Rozpracováno',kind:'progress'};}
   function recordStatus(record){return status({hasContent:hasContent(record),complete:complete(record),hasConclusion:present(record?.assessment)&&present(record?.advice),hasEvidence:present(record?.law)&&present(record?.source)&&present(record?.quote),hasAi:present(record?.ai)});}
-  function errorText(error){const codes={MODEL_ACCESS_REQUIRED:"Tento zápis není mezi modelovými profily ověřenými pro toto přihlášení.",COURSE_NOT_CONFIGURED:'Nastavení ukládání a přístupu vyučující zatím není dokončené.',TEACHER_NOT_ALLOWED:'Tento účet nemá přístup k práci studentů. Přihlaste se určeným účtem vyučující.',AUTH_CANCELLED:'Přihlášení bylo zrušeno. Až budete chtít pokračovat, zkuste je znovu.',AUTH_POPUP_BLOCKED:'Prohlížeč zablokoval přihlašovací okno. Povolte pro tuto stránku vyskakovací okno a zkuste přihlášení znovu.'};return codes[error?.code]||error?.message||'Připojení se nepodařilo. Zkuste to znovu.';}
+  function errorText(error){const codes={COURSE_NOT_CONFIGURED:'Nastavení ukládání a přístupu vyučující zatím není dokončené.',TEACHER_NOT_ALLOWED:'Tento účet nemá přístup k práci studentů. Přihlaste se určeným účtem vyučující.',AUTH_CANCELLED:'Přihlášení bylo zrušeno. Až budete chtít pokračovat, zkuste je znovu.',AUTH_POPUP_BLOCKED:'Prohlížeč zablokoval přihlašovací okno. Povolte pro tuto stránku vyskakovací okno a zkuste přihlášení znovu.'};return codes[error?.code]||error?.message||'Připojení se nepodařilo. Zkuste to znovu.';}
   function denied(error){return error?.status===401||error?.status===403||['TEACHER_NOT_ALLOWED','permission-denied','firestore/permission-denied','unauthenticated'].includes(error?.code);}
   function sameAuth(generation){return state.authorized&&generation===authGeneration;}
   function clearPrivateData(){
@@ -158,7 +158,7 @@
     write('caseColumn',$('caseFilter').value==='all'?'Poslední uložený případ':'Případ podle filtru');$('resetFilters').hidden=!$('nameFilter').value&&!$('dateFilter').value&&$('caseFilter').value==='all';
     write('filterResult',state.rosterLoaded?`Zobrazeno ${rows.length} z ${state.students.length} studentů.`:'');
     $('rosterTableWrap').hidden=!rows.length;$('rosterEmpty').hidden=!!rows.length;const body=document.createDocumentFragment();
-    if(!rows.length){let title='Načítám uloženou práci…',description='';if(state.rosterLoaded){title=state.students.length?'Filtrům neodpovídá žádný student':state.rosterFresh?'Zatím tu není žádný modelový profil':'Čekám na potvrzení přehledu';description=state.students.length?'Změňte datum, případ nebo hledané jméno.':state.rosterFresh?'Server nepotvrdil žádný z hledaných modelových profilů Alfa a Beta.':'Zatím nelze určit, zda jsou v kurzu uložení studenti. Obnovte připojení k internetu.';}$('rosterEmpty').replaceChildren(element('h3',title),element('p',description));}
+    if(!rows.length){let title='Načítám uloženou práci…',description='';if(state.rosterLoaded){title=state.students.length?'Filtrům neodpovídá žádný student':state.rosterFresh?'Zatím tu není žádný student':'Čekám na potvrzení přehledu';description=state.students.length?'Změňte datum, případ nebo hledané jméno.':state.rosterFresh?'Jakmile student otevře audit a zadá své jméno, objeví se zde automaticky.':'Zatím nelze určit, zda jsou v kurzu uložení studenti. Obnovte připojení k internetu.';}$('rosterEmpty').replaceChildren(element('h3',title),element('p',description));}
     for(const {student,caseId,summary} of rows){
       const row=element('tr',null,state.selectedId===student.id?'selected':'');const name=element('th',null);name.scope='row';const button=studentButton(student.displayName,student.id,caseId,'student-name','name');button.setAttribute('aria-expanded',String(state.selectedId===student.id));button.setAttribute('aria-controls','studentDetail');name.append(button,element('small',`${Object.values(student.caseSummaries||{}).filter(s=>s.hasContent&&s.complete).length} / 10 auditů vyplněno`));
       const choice=student.selectedCaseId;
@@ -244,10 +244,7 @@
   for(let i=0;i<CASES.length;i++){const option=element('option',`${i+1}. ${CASES[i].title}`);option.value=String(i);$('caseFilter').append(option);$('detailCase').append(option.cloneNode(true));}
   for(const id of ['nameFilter','caseFilter','dateFilter'])$(id).addEventListener(id==='nameFilter'?'input':'change',()=>{closeDetail(false);renderRoster();});
   $('resetFilters').addEventListener('click',()=>{$('nameFilter').value='';$('caseFilter').value='all';$('dateFilter').value='';closeDetail(false);renderRoster();});
-  $('refreshButton').addEventListener('click',()=>{
-    closeDetail(false);
-    watchStudents();
-  });
+  $('refreshButton').addEventListener('click',()=>{watchStudents();if(state.selectedId)void loadDetail(state.selectedId,false);});
   $('closeDetail').addEventListener('click',()=>closeDetail());
   $('detailCase').addEventListener('change',()=>{state.selectedCase=$('detailCase').value;resetHistory();renderDetail();if($('historyPanel').open)void loadHistory();});
   $('historyPanel').addEventListener('toggle',()=>{if($('historyPanel').open)void loadHistory();});
@@ -258,7 +255,7 @@
   window.addEventListener('pagehide',()=>{clearPrivateData();stopAuth();stopAuth=()=>{};});
   window.addEventListener('pageshow',event=>{if(event.persisted)window.location.reload();});
   function initialize(){
-    store=window.AuditStore;if(!store||!store.configured||store.scope!=='two-models-20261123'){showSetup();return;}
+    store=window.AuditStore;if(!store||!store.configured){showSetup();return;}
     try{stopAuth=store.teacherOnAuth(onTeacherAuth);}catch(error){if(error?.code==='COURSE_NOT_CONFIGURED'){showSetup();return;}$('loadingState').hidden=true;showEntry(errorText(error));}
   }
   void initialize();

@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Ověření dvou modelových zápisů v Právním auditu AI.">
-  <title>Ověření dvou modelových zápisů · Právní audit AI</title>
+  <meta name="description" content="Soukromý přehled uložené práce studentů v Právním auditu AI.">
+  <title>Práce studentů · Právní audit AI</title>
   <link rel="stylesheet" href="teacher.css">
   <script defer src="../firebase-config.js"></script>
-  <script defer src="firebase-models.js"></script>
+  <script defer src="../firebase-store.js"></script>
   <script defer src="teacher.js"></script>
 </head>
 <body>
@@ -22,8 +22,8 @@
 </header>
 <main id="main" class="page">
   <section id="entry" class="entry" aria-labelledby="entryTitle">
-    <div class="eyebrow">PRO VYUČUJÍCÍ</div><h1 id="entryTitle">Ověření dvou modelových zápisů</h1>
-    <p class="lead">Přihlaste se určeným účtem Google. Otevřete modelový zápis Alfa v případu DPP a zápis Beta v případu DPČ.</p>
+    <div class="eyebrow">PRO VYUČUJÍCÍ</div><h1 id="entryTitle">Práce studentů<br>na jednom místě.</h1>
+    <p class="lead">Přečtěte si skutečné odpovědi AI, právní důkazy a vlastní závěry studentů. Uvidíte i rozpracované zápisy a jejich uložené verze.</p>
     <div id="loadingState" class="entry-status" role="status">Připravuji bezpečné přihlášení…</div>
     <div id="setupState" class="setup-state" hidden><h2>Přehled ještě není připojený</h2><p>Nastavení ukládání a přístupu vyučující zatím není dokončené. Jakmile bude připravené, na této stránce se objeví přihlášení a práce studentů.</p><a href="../" class="button secondary">Otevřít studentský vstup</a></div>
     <div id="authState" hidden><button id="signInButton" class="button primary" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span id="signInLabel">Přihlásit se účtem Google</span></button><p class="entry-note">Přístup má pouze určená vyučující. Studenti přihlašování Google nepotřebují; do auditu vstupují svým jménem.</p></div>
@@ -32,11 +32,11 @@
   </section>
 
   <section id="dashboard" class="dashboard" aria-labelledby="dashboardTitle" hidden>
-    <div class="page-heading"><div><span class="eyebrow">SOUKROMÝ PŘEHLED VÝUKY</span><h1 id="dashboardTitle">Ověření dvou modelových zápisů</h1><p>Otevřete Alfu u případu DPP a Betu u případu DPČ. Ověřte text odpovědi a čas uložení v každém zápisu.</p></div><div class="live-state"><span class="live-dot" aria-hidden="true"></span><span id="liveStatus" role="status">Načítám přehled…</span><small>Změny se zobrazují průběžně.</small></div></div>
+    <div class="page-heading"><div><span class="eyebrow">SOUKROMÝ PŘEHLED VÝUKY</span><h1 id="dashboardTitle">Práce studentů</h1><p>Uložené odpovědi a celý postup ověření.</p></div><div class="live-state"><span class="live-dot" aria-hidden="true"></span><span id="liveStatus" role="status">Načítám přehled…</span><small>Změny se zobrazují průběžně.</small></div></div>
     <div id="rosterError" class="notice error" role="alert" hidden></div>
-    <div class="roster-heading"><h2>Modelové profily <span id="studentCount" class="count">0</span></h2><p id="completionSummary"></p></div>
+    <div class="roster-heading"><h2>Studenti <span id="studentCount" class="count">0</span></h2><p id="completionSummary"></p></div>
     <div class="filters" aria-label="Filtry přehledu">
-      <label><span>Název modelového profilu</span><input id="nameFilter" type="search" autocomplete="off" placeholder="Najít studenta…"></label>
+      <label><span>Jméno studenta</span><input id="nameFilter" type="search" autocomplete="off" placeholder="Najít studenta…"></label>
       <label><span>Případ</span><select id="caseFilter"><option value="all">Všechny případy</option></select></label>
       <label><span>Datum posledního uložení</span><input id="dateFilter" type="date"></label>
       <button id="resetFilters" class="text-button" type="button" hidden>Zrušit filtry</button>
