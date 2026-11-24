@@ -171,3 +171,7 @@
   .learning-tab, .learning-tab[aria-selected=true] { padding: 10px 8px; gap: 7px; min-height: 90px; }
   .classroom, .slide-player, .example-card { box-shadow: 2px 3px 0 var(--line); }
 }
+
+.slide-introduction{border-left:4px solid var(--blue);padding:4px 20px;margin:0 0 28px;background:var(--periwinkle-light)}
+.slide-introduction p{font-size:18px;line-height:1.8;margin:12px 0}
+@media(max-width:560px){.slide-introduction{padding:3px 14px}.slide-introduction p{font-size:16px}}
