@@ -19,7 +19,7 @@ window.AuditLearningContent = {
     "severance": "https://ppropo.mpsv.cz/VI223Odstupne"
   },
   "prompt": "Proveď studijní právní rozbor podle českého zákoníku práce. Výuka pracuje s právním stavem k 24. 11. 2026; uvádí-li situace pozdější datum, ověř také znění účinné pro tento den. Rozliš účinná pravidla a budoucí změny. Uveď konkrétní paragraf a odstavec, použití na fakta klienta, praktické doporučení a chybějící informace. Pokud nemůžeš ověřit aktuální znění nebo si nejsi jistý, výslovně to uveď. Nevymýšlej citace ani zdroje.\n\nSituace: Petra pracuje v jedné kavárně na DPP. Od ledna do června odpracovala 240 hodin. Zaměstnavatel jí nabízí další DPP na 110 hodin do konce roku 2026. Tvrdí, že na novou dohodu má nový limit 300 hodin.\n\nÚkol: Rozhodněte, zda může Petra na druhou DPP odpracovat dalších 110 hodin u stejného zaměstnavatele. Vypočítejte zbývající rozsah.",
-  "simulation": "Ano. Nová DPP zakládá nový limit 300 hodin. Petra proto může na druhou dohodu odpracovat všech 110 hodin, i když jde o stejného zaměstnavatele.",
+  "simulation": "Podle § 75 zákoníku práce ano. Nová DPP zakládá nový limit 300 hodin. Petra proto může na druhou dohodu odpracovat všech 110 hodin, i když jde o stejného zaměstnavatele.",
   "slides": [
     {
       "n": 1,
@@ -618,7 +618,7 @@ window.AuditLearningContent = {
       "bottom": "Vyberte jeden výrok a formulujte otázku, kterou byste klientovi položili jako první.",
       "note": "U přestávky například začněte otázkou, od kolika do kolika klient skutečně pracoval. Zákon výslovně vylučuje poskytnutí běžné přestávky na začátku a konci pracovní doby.",
       "n": 25,
-      "explanation": "Právní důkaz v našem auditu znamená konkrétní ustanovení, o které se opírá odpověď. Výkladový článek může pomoci zákon pochopit, ale potom otevřete samotný zákon a přečtěte příslušnou část. Uložte odkaz na zdroj, který jste skutečně použili."
+      "explanation": "Nejdřív získáte odpověď AI včetně navrženého paragrafu. Potom tento paragraf otevřete v zákoně a ověříte jeho znění, účinnost a použití na případ. Pokud AI paragraf neuvede nebo uvede nesouvisející ustanovení, pomůže hledání podle právního pojmu a nápověda v pracovním listu. Právní důkaz v našem auditu znamená konkrétní přečtené ustanovení, o které se opírá Váš závěr. Výkladový článek může pomoci zákon pochopit, ale potom otevřete samotný zákon a přečtěte příslušnou část. Uložte odkaz na zdroj, který jste skutečně použili."
     },
     {
       "n": 26,
