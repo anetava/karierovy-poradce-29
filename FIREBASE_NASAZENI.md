@@ -1,8 +1,8 @@
 # Právní audit AI na GitHub Pages
 
-## Stav k 23. listopadu 2026
+## Stav k 24. listopadu 2026
 
-Celá integrace je v [návrhu změn č. 1](https://github.com/anetava/karierovy-poradce-29/pull/1). Majitelka 23. listopadu opravila přístup k repozitáři a zápis na GitHub byl ověřen. Pro živé ověření vyučující byly v [samostatném vydání č. 2](https://github.com/anetava/karierovy-poradce-29/pull/2) přidány výhradně soubory vstupu pro ověření dvou modelových prací. Původních 20 karet a původní lokální studentský audit při tomto dílčím vydání zůstávají na své adrese. Návrh č. 1 po dokončení kontrol nahradí dvouzáznamový režim úplným přehledem a připojí studentskou část.
+Integrace studentského listu a úplného učitelského přehledu je v [návrhu změn č. 1](https://github.com/anetava/karierovy-poradce-29/pull/1). Pro živé ověření vyučující byly v [samostatném vydání č. 2](https://github.com/anetava/karierovy-poradce-29/pull/2) přidány dva modelové záznamy. Vydání č. 1 připojuje studentskou část a úplný přehled na původní adresu.
 
 | Co bylo ověřeno | Výsledek |
 | --- | --- |
@@ -61,7 +61,7 @@ Před přechodem lze v současném veřejném auditu zvolit „Stáhnout zálohu
 - Student zadá jméno a příjmení. Přístup k pracovnímu listu určuje anonymní účet Firebase. Rozpracované odpovědi se uchovávají místně a po krátké odmlce se odesílají. Hlášení „Uloženo pro vyučující“ vyžaduje potvrzení serveru.
 - Na sdíleném počítači slouží k odhlášení „Ukončit práci na tomto zařízení“. Student si může stáhnout vlastní zálohu. Při ztrátě anonymní identity lze její obsah načíst do nového vlastního pracovního listu. Opětovné zadání jména nezpřístupní dřívější účet.
 - Vyučující vidí změny uložených odpovědí a historii. Čas zápisu sám o sobě nedokládá přítomnost u počítače ani četbu zákona.
-- Před prací se skutečnými údaji má ČZU jako správce potvrdit účel a právní základ, přístupy, dobu uchování a postup výmazu záznamů včetně historie a anonymní identity. Pro dohodnutou lhůtu je třeba zajistit výmaz. Student před zadáním jména otevře [informace o zpracování údajů](./pravni-audit-ai/#auditPrivacyBrief).
+- Student před zadáním jména otevře [informace o zpracování údajů](./pravni-audit-ai/#auditPrivacyBrief). Zatím není nastaven automatický výmaz odpovědí, historie ani anonymního účtu. Správce projektu musí zajistit výmaz také v podkolekcích a Firebase Authentication.
 
 ### Opakování vývojových kontrol
 
@@ -76,17 +76,17 @@ npm run test:rules
 npm run check:release -- --ready
 ```
 
-## Podmínky použití skutečných údajů ve výuce
+## Provozní otázky ke zpracování údajů
 
-Pracovní větev je připravena pro testy s modelovými jmény a odpověďmi. ČZU jako zamýšlený správce rozhodne o použití ve výuce po projednání s pověřencem. Schválené údaje patří do informace u formuláře v souboru `pravni-audit-ai/index.html`.
+Následující údaje nejsou v současné verzi určeny ani automaticky vynucovány. Informace u formuláře v souboru `pravni-audit-ai/index.html` uvádějí skutečný stav aplikace.
 
-| Rozhodnutí ČZU | Co doplnit nebo provést |
+| Oblast | Co doplnit nebo provést |
 | --- | --- |
 | Účel, právní základ a podmínky účasti | Určit odpovědný útvar, kontakt správce a příslušný právní základ podle čl. 6 GDPR včetně právního předpisu, pokud se o něj zpracování opírá. Vymezit zpětnou vazbu a případné využití při hodnocení. Upřesnit, zda student musí použít jmenný list, jaké má důsledky neposkytnutí jména a jak se případná náhradní cesta používá. Vstup do aplikace představuje otevření pracovního listu. |
 | Retence, výmaz, žádosti studentů | Stanovit lhůtu nebo určitelné kritérium pro studentský profil, rozepsané odpovědi, jednotlivé revize, anonymní účet i případné provozní zálohy. Určit odpovědnou osobu, četnost výmazu a bezpečný způsob ověření žadatele. Ověřit výmaz podkolekcí případů a historie i řešení výmazu účtu Firebase Auth. Samotné odstranění profilu ve Firestore podkolekce ponechá. Odhlášení ze školního PC uzavírá místní přístup. |
 | Přístup a služby | Posoudit oprávnění k Firebase projektu, účty s administrátorskými rolemi a schválení současného osobního účtu Google vyučující. Pokud má vyučující přejít na univerzitní identitu, současně změnit pravidla i klienta a znovu ověřit přístup. Potvrdit smluvní nastavení pro Google/Firebase a GitHub, dotčené kategorie údajů a přístupy poskytovatelů. |
 | Předávání mimo EHP | Ověřit lokaci konkrétní databáze Firestore. Posoudit samostatně Firebase Authentication, kterou Google provozuje v USA, a technické zpracování při hostování na GitHub Pages. Doložit použitelný titul předání podle kapitoly V GDPR a podle skutečného řešení uvést rozhodnutí o odpovídající ochraně nebo odpovídající záruky, včetně toho, jak lze získat jejich kopii. |
 
-Po schválení nahradit dočasné formulace o testu konkrétními potvrzenými údaji a verzovat informační text. Je-li třeba změnit hodnotu `noticeVersion`, současně upravit pravidla a klienta tak, aby se dříve vytvořené profily dále bezpečně otevíraly a přijímaly změny. Uložená verze informačního textu není dokladem uděleného souhlasu.
+Při změně informačního textu verzovat jeho obsah. Je-li třeba změnit hodnotu `noticeVersion`, současně upravit pravidla a klienta tak, aby se dříve vytvořené profily dále bezpečně otevíraly a přijímaly změny. Uložená verze informačního textu není dokladem uděleného souhlasu.
 
 [Čl. 13 GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [ČZU a ochrana osobních údajů](https://gdpr.czu.cz/cs) · [Firebase a lokality zpracování](https://firebase.google.com/support/privacy) · [GitHub Pages a IP adresy](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) · [Výmaz dokumentů a podkolekcí ve Firestore](https://firebase.google.com/docs/firestore/manage-data/delete-data#delete_documents)
