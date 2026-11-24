@@ -5,7 +5,7 @@
 const scopeUrl = new URL('./', self.location.href);
 const cachePrefix = 'pravni-audit-ai-public-shell:' + scopeUrl.pathname + ':';
 // npm run build updates this fingerprint when any public worksheet file changes.
-const shellVersion = 'ea53c71ff793666ecb0a41b0f0014fe2';
+const shellVersion = 'd7743696b136b94e575533f942be67d4';
 const cacheName = cachePrefix + shellVersion;
 const assets = [
   'index.html', 'classroom.css', 'learning.css', 'firebase-config.js',

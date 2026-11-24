@@ -73,16 +73,7 @@
   <section class="classroom" aria-labelledby="classModeText">
     <div class="classroom-top"><div><h2 id="classModeText">Začněte svým jménem</h2><p id="classJoinLead">Zadejte jméno a příjmení a zvolte „Začít pracovat“.</p></div></div>
     <p id="auditPrivacyBrief">Vyučující vidí Vaše jméno, rozpracované odpovědi i jejich uložené verze.</p>
-    <details id="auditPrivacy" class="classroom-options">
-      <summary>Jak se nakládá s Vaší prací a osobními údaji</summary>
-      <p><strong>Účel a rozsah.</strong> Údaje slouží k vedení pracovního listu a ke zpětné vazbě v předmětu Legislativa kariérového poradce na IVP ČZU. Ukládá se jméno a příjmení, obsah listu včetně předchozích verzí, čas zahájení a čas uložení, číslo Vámi vybraného případu, číslo naposledy uloženého případu a stav vyplnění. Součástí záznamu je technický identifikátor účtu (UID), který odlišuje i dvě osoby stejného jména. Zelená značka vyjadřuje vyplnění polí. Právní úsudek posuzuje vyučující.</p>
-      <p><strong>Kdo má přístup.</strong> V aplikaci otevřete vlastní list a oprávněná vyučující může číst uložené verze v učitelském přehledu. Technický přístup se řídí oprávněními správců projektu a nastavením služeb Google. Výklad a vzor můžete otevřít i bez jména. Jméno se požaduje při otevření sdíleného pracovního listu.</p>
-      <p><strong>Kde se údaje zpracovávají.</strong> Obsah pracovního listu se odesílá do databáze Google Cloud Firestore. Firebase Authentication vytváří studentský účet na pozadí a zpracovává technické údaje včetně IP adresy a údajů o prohlížeči v USA. Stránku poskytuje GitHub Pages, který zaznamenává IP adresy návštěvníků. S dotazy k poskytovatelům a předávání údajů se obraťte na pověřence pro ochranu osobních údajů ČZU.</p>
-      <p><strong>Uchování a sdílený počítač.</strong> Pro automatický výmaz odpovědí, jejich historie a účtů není nastavena lhůta. Údaje zůstávají uložené do výmazu správcem projektu. Rozpracovaný list se uchovává také v prohlížeči. Před odchodem zkontrolujte stav uložení a zvolte „Ukončit práci na tomto zařízení“. Tím se uzavře místní přístup; uložené verze zůstávají v databázi. Staženou kopii odstraňte ze sdíleného počítače.</p>
-      <p><strong>Při práci s vlastní AI</strong> kopírujte jen připravené modelové zadání. Jména studentů, osobní údaje skutečných klientů ani údaje z cizích pracovních listů do AI nevkládejte.</p>
-      <p><strong>Dotazy a Vaše práva.</strong> Ve věcech ochrany údajů při výuce se můžete obrátit na Českou zemědělskou univerzitu v Praze, Kamýcká 129, Praha 6 – Suchdol, a na jejího pověřence. Můžete požádat o přístup ke svým údajům a jejich opravu. Podle právního základu a zákonných podmínek můžete žádat také o omezení zpracování, výmaz nebo přenositelnost, případně vznést námitku. Máte právo podat stížnost k Úřadu pro ochranu osobních údajů.</p>
-      <p><a href="mailto:dpo@czu.cz">dpo@czu.cz</a> · <a href="https://gdpr.czu.cz/cs" target="_blank" rel="noopener noreferrer">Ochrana údajů na ČZU</a> · <a href="https://uoou.gov.cz/" target="_blank" rel="noopener noreferrer">Úřad pro ochranu osobních údajů</a></p>
-    </details>
+
     <div id="classJoin">
       <form id="classForm" class="classroom-form">
         <div><label for="className">Jméno a příjmení</label><input id="className" type="text" minlength="2" maxlength="80" autocomplete="off" placeholder="Například Jana Nováková" aria-describedby="classJoinLead auditPrivacyBrief" required></div>
